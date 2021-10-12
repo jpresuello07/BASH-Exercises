@@ -1,4 +1,7 @@
+#               This script will check the memory usage
+
 #!/bin/bash
+
 
 #Parameters
 #c - Critical threshold (Percentage)
@@ -21,15 +24,15 @@ do
     case "${flag}" in
         c) 
             critical=${OPTARG}
-            echo "Critical threshold: $critical"
+            #echo "Critical threshold: $critical"
             ;;
         w) 
             warning=${OPTARG}
-            echo "Warning threshold: $warning"
+            #echo "Warning threshold: $warning"
             ;;
         e) 
             email_add=${OPTARG}
-            echo "Email Address: $email_add"
+            #echo "Email Address: $email_add"
             ;;
         *) 
             echo "Unknown parameter/s entered. Please refer below:"
@@ -45,23 +48,25 @@ done
 
 TOTAL_MEMORY=$(free | grep Mem: | awk '{print $2}')
 USED_MEMORY=$(free | grep Mem: | awk '{print $3}')
-echo "Used Memory: $TOTAL_MEMORY"
+#echo "Used Memory: $TOTAL_MEMORY"
 
-USAGE_PERCENTAGE=$(("$USED_MEMORY/$TOTAL_MEMORY"))
-echo $USAGE_PERCENTAGE
+USAGE_PERCENTAGE=$(("100* $USED_MEMORY/$TOTAL_MEMORY"))
+#echo $USAGE_PERCENTAGE
     
 
 if [[ $USAGE_PERCENTAGE -ge $critical ]]
 then
-    echo "Memory Usage is very High"
-    exit 2
+    #echo "Memory Usage is very High"
+    echo 2
     
 elif [[ $USAGE_PERCENTAGE -ge $warning ]] && [[ $USAGE_PERCENTAGE -lt $critical ]]
 then
-    echo "Memory Usage is higher than normal but not critical"
-    exit 1
+    #echo "Memory Usage is higher than normal but not critical"
+    echo 1
     
 else
-    echo "Memory Usage is normal"
-    exit 0
+    #echo "Memory Usage is normal"
+    echo 0
 fi
+
+exit

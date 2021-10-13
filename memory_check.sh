@@ -1,48 +1,30 @@
-#               This script will check the memory usage
-
 #!/bin/bash
-
-
-#Parameters
-#c - Critical threshold (Percentage)
-#w - Warning threshold (Percentage)
-#e - Email Address to send the report
-
 if [[ $# -eq 0 ]] ; 
 then
     echo "Please input the following Parameters (in any order):"
     echo "Critical Threshold (Percentage) = -c <desired critical memory percentage>"
-    echo "Warning Threshold (Percentage) = -w <desired warning memory percentage>"
+    echo "Warning Thre shold (Percentage) = -w <desired warning memory percentage>"
     echo "Email Address (where the report will be sent) = -e <email address>"
     echo "Example: -c 90 -w 60 -e juan123@gmail.com"
- 
-    exit 0
+	
+	exit
 fi
 
-while getopts c:w:e: flag
-do
-    case "${flag}" in
-        c) 
-            critical=${OPTARG}
-            #echo "Critical threshold: $critical"
+while getopts ":c:w:e:" flag; do
+	case "${flag}" in
+        c)	critical=${OPTARG}
+			;;
+        w)	warning=${OPTARG}
             ;;
-        w) 
-            warning=${OPTARG}
-            #echo "Warning threshold: $warning"
-            ;;
-        e) 
-            email_add=${OPTARG}
-            #echo "Email Address: $email_add"
-            ;;
-        *) 
-            echo "Unknown parameter/s entered. Please refer below:"
-            echo "Critical Threshold (Percentage) = -c <desired critical memory percentage>)"
-            echo "Warning Threshold (Percentage) = -w <desired warning memory percentage>"
-            echo "Email Address (where the report will be sent) = -e <email address>"
-            echo "Example: -c 90 -w 60 -e juan123@gmail.com"
-            ;;
+        e) 	email_add=${OPTARG}
+			;;
+        *)	echo "Unknown parameter/s entered. Please refer below:"
+			echo "Critical Threshold (Percentage) = -c <desired critical memory percentage>)"
+			echo "Warning Threshold (Percentage) = -w <desired warning memory percentage>"
+			echo "Email Address (where the report will be sent) = -e <email address>"
+			echo "Example: -c 90 -w 60 -e juan123@gmail.com"
+			;;
     esac
-
 done
 
 

@@ -57,16 +57,16 @@ USAGE_PERCENTAGE=$(("100* $USED_MEMORY/$TOTAL_MEMORY"))
 if [[ $USAGE_PERCENTAGE -ge $critical ]]
 then
     #echo "Memory Usage is very High"
-    echo 2
+    exit 2
     
 elif [[ $USAGE_PERCENTAGE -ge $warning ]] && [[ $USAGE_PERCENTAGE -lt $critical ]]
 then
     #echo "Memory Usage is higher than normal but not critical"
-    echo 1
+    exit 1
     
 else
     #echo "Memory Usage is normal"
-    echo 0
+    exit 0
 fi
 
 exit

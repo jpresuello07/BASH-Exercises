@@ -27,7 +27,6 @@ while getopts ":c:w:e:" flag; do
     esac
 done
 
-
 TOTAL_MEMORY=$(free | grep Mem: | awk '{print $2}')
 USED_MEMORY=$(free | grep Mem: | awk '{print $3}')
 #echo "Used Memory: $TOTAL_MEMORY"
